@@ -1,0 +1,86 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'premios'",
+        "route": "/premios",
+        "method": "GET",
+        "sql": "SELECT * FROM premios",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'premios' by its primary key",
+        "route": "/premios/$premioId",
+        "method": "GET",
+        "sql": "SELECT * FROM premios WHERE premioId = $premioId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'premios'",
+        "route": "/premios",
+        "method": "POST",
+        "sql": "INSERT INTO premios (nombreConcurso, primerPremio, primerPremioCuantia, segundoPremio, segundoPremioCuantia, tercerPremio, tercerPremioCuantia, cuartoPremio, cuartoPremioCuantia, quintoPremio, quintoPremioCuantia, sextoPremio, sextoPremioCuantia, septimoPremio, septimoPremioCuantia) VALUES ($nombreConcurso, $primerPremio, $primerPremioCuantia, $segundoPremio, $segundoPremioCuantia, $tercerPremio, $tercerPremioCuantia, $cuartoPremio, $cuartoPremioCuantia, $quintoPremio, $quintoPremioCuantia, $sextoPremio, $sextoPremioCuantia, $septimoPremio, $septimoPremioCuantia)",
+        "request_body_params": [
+            "nombreConcurso",
+            "primerPremio",
+            "primerPremioCuantia",
+            "segundoPremio",
+            "segundoPremioCuantia",
+            "tercerPremio",
+            "tercerPremioCuantia",
+            "cuartoPremio",
+            "cuartoPremioCuantia",
+            "quintoPremio",
+            "quintoPremioCuantia",
+            "sextoPremio",
+            "sextoPremioCuantia",
+            "septimoPremio",
+            "septimoPremioCuantia"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'premios' by its primary key",
+        "route": "/premios/$premioId",
+        "method": "PUT",
+        "sql": "UPDATE premios SET nombreConcurso = $nombreConcurso, primerPremio = $primerPremio, primerPremioCuantia = $primerPremioCuantia, segundoPremio = $segundoPremio, segundoPremioCuantia = $segundoPremioCuantia, tercerPremio = $tercerPremio, tercerPremioCuantia = $tercerPremioCuantia, cuartoPremio = $cuartoPremio, cuartoPremioCuantia = $cuartoPremioCuantia, quintoPremio = $quintoPremio, quintoPremioCuantia = $quintoPremioCuantia, sextoPremio = $sextoPremio, sextoPremioCuantia = $sextoPremioCuantia, septimoPremio = $septimoPremio, septimoPremioCuantia = $septimoPremioCuantia WHERE premioId = $premioId",
+        "request_body_params": [
+            "nombreConcurso",
+            "primerPremio",
+            "primerPremioCuantia",
+            "segundoPremio",
+            "segundoPremioCuantia",
+            "tercerPremio",
+            "tercerPremioCuantia",
+            "cuartoPremio",
+            "cuartoPremioCuantia",
+            "quintoPremio",
+            "quintoPremioCuantia",
+            "sextoPremio",
+            "sextoPremioCuantia",
+            "septimoPremio",
+            "septimoPremioCuantia"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'premios' by its primary key",
+        "route": "/premios/$premioId",
+        "method": "DELETE",
+        "sql": "DELETE FROM premios WHERE premioId = $premioId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

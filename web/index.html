@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/web/index.js" type="module"> </script>
+    <script src="/web/js/api/_metadatos.js" type="module"> </script>
+
+    <script src="/js/renderers/messages.js" type="module"> </script>
+    <script src="js/libs/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <title>Enfrentamientos Chinos</title>
+    <link href="./css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+   
+</head>
+<body>
+    <div id="dirModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Selecciona el directorio</h2>
+            <div class="directory-tree" id="directoryTree"></div>
+            <button id="selectDir">Seleccionar</button>
+        </div>
+    </div>
+
+    <div class="container container-brackets">
+        <h1 class="text-center mb-4">🏆 Torneo Internacional de Chinos</h1>
+        
+        <div id="errors"></div>
+
+        <div class="fase">PRIMERA FASE</div>
+        <div class="botones">
+            <button id="boton-sorteo">
+                SORTEAR CUADRO DE GRUPOS
+            </button>
+            <div id="boton-atras">
+                <img class="flecha" id="flecha-atras-grid-1" src="/web/images/angle-arrow-down_icon-icons.com_73683-blanco-left.png" alt="ADELANTE">
+            </div>
+            <div id="boton-adelante">
+                <img class="flecha" id="flecha-adelante-grid-1" src="/web/images/angle-arrow-down_icon-icons.com_73683-blanco-right.png" alt="ADELANTE">
+            </div>
+        </div>
+        
+        
+        <div class="brackets-grid" id="1">
+
+        </div>
+        <div class="brackets-grid" id="2">
+
+        </div>    
+        
+    </div>
+                
+    <div class="modal fade" id="confirmarEliminacionModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que quieres eliminar a este participante?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" onclick="eliminarParticipante()">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="resultadoPartidaModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Resultado de la Partida</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Cuál ha sido el resultado para <span id="nombreParticipante"></span>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="marcarResultado('ganador')">¡Ha Ganado! 🏆</button>
+                    <button type="button" class="btn btn-danger" onclick="marcarResultado('perdedor')">Ha Perdido 😢</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--
+     <div id="rutaAlert" class="path-display d-none">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>📂 Ruta del archivo:</strong>
+            <p id="rutaTexto" class="mb-0 text-break"></p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+
+    <div class="container main-container">
+        <div class="card shadow-lg" style="max-width: 500px; width: 100%;">
+            <div class="card-body p-4">
+                <h3 class="card-title text-center mb-4">Selector de CSV pa los Chinos</h3>
+                
+                <div class="mb-4">
+                    <label for="fileInput" class="form-label">Selecciona el archivo CSV o TXT:</label>
+                    <input type="file" 
+                           class="form-control" 
+                           id="fileInput" 
+                           accept=".csv,.txt"
+                           aria-describedby="fileHelp">
+                    <div id="fileHelp" class="form-text">
+                        El archivo debe estar en formato CSV o TXT
+                    </div>
+                </div>
+
+                <button onload="procesarArchivo()"
+                        class="btn btn-primary w-100"
+                        id="procesarBtn">
+                    Procesar Archivo
+                </button>
+
+                <div class="d-none text-center mt-3" id="spinner">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando...</span>
+                    </div>
+                    <p class="mt-2">Procesando el archivo...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+
+    <script>
+
+        //edicion
+        let participanteActual = null;
+        const modalResultado = new bootstrap.Modal(document.getElementById('resultadoPartidaModal'));
+
+        function mostrarModalResultado(elemento) {
+            participanteActual = elemento.closest('.participante');
+            let nombreParticipante = participanteActual.textContent.trim().substring(0, participanteActual.textContent.trim().indexOf("⋮"));
+            document.getElementById('nombreParticipante').textContent = nombreParticipante;
+            console.log(nombreParticipante);
+            modalResultado.show();
+        }
+
+        function marcarResultado(resultado) {
+            if (participanteActual) {
+                // Primero quitamos cualquier clase previa
+                participanteActual.classList.remove('ganador', 'perdedor');
+        
+                // Añadimos la clase según el resultado
+            if (resultado === 'ganador') {
+                participanteActual.classList.add('ganador');
+            } else {
+                participanteActual.classList.add('perdedor');
+            }
+        
+            modalResultado.hide();
+            participanteActual = null;
+            }
+        }
+        
+        //eliminacion
+        let participanteAEliminar = null;
+        const modalEliminacion = new bootstrap.Modal(document.getElementById('confirmarEliminacionModal'));
+
+        function confirmarEliminacion(elemento) {
+            participanteAEliminar = elemento.closest('.participante');
+            modalEliminacion.show();
+        }
+
+        function eliminarParticipante() {
+            if (participanteAEliminar) {
+                participanteAEliminar.classList.add('eliminado');
+                setTimeout(() => {
+                    participanteAEliminar.remove();
+                    participanteAEliminar = null;
+                }, 500);
+                modal.hide();
+            }
+        }
+
+        // Funciones de arrastre
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.dataset.participanteId);
+            ev.target.classList.add('dragging');
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+            ev.currentTarget.classList.add('over');
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            const participanteId = ev.dataTransfer.getData("text");
+            const participante = document.querySelector(`[data-participante-id="${participanteId}"]`);
+            const container = ev.currentTarget;
+            
+            container.appendChild(participante);
+            document.querySelectorAll('.dragging').forEach(el => el.classList.remove('dragging'));
+            document.querySelectorAll('.over').forEach(el => el.classList.remove('over'));
+        }
+
+        // Eliminar clase 'over' cuando el ratón sale del área
+        document.querySelectorAll('.participantes').forEach(container => {
+            container.addEventListener('dragleave', function(e) {
+                if (e.target === container) {
+                    container.classList.remove('over');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'concursantes'",
+        "route": "/concursantes",
+        "method": "GET",
+        "sql": "SELECT * FROM concursantes",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'concursantes' by its primary key",
+        "route": "/concursantes/$concursanteId",
+        "method": "GET",
+        "sql": "SELECT * FROM concursantes WHERE concursanteId = $concursanteId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'concursantes'",
+        "route": "/concursantes",
+        "method": "POST",
+        "sql": "INSERT INTO concursantes (concursoId, nombre, edad, localidad, foto, socio) VALUES ($concursoId, $nombre, $edad, $localidad, $foto, $socio)",
+        "request_body_params": [
+            "concursoId",
+            "nombre",
+            "edad",
+            "localidad",
+            "foto",
+            "socio"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'concursantes' by its primary key",
+        "route": "/concursantes/$concursanteId",
+        "method": "PUT",
+        "sql": "UPDATE concursantes SET concursoId = $concursoId, nombre = $nombre, edad = $edad, localidad = $localidad, foto = $foto, socio = $socio WHERE concursanteId = $concursanteId",
+        "request_body_params": [
+            "concursoId",
+            "nombre",
+            "edad",
+            "localidad",
+            "foto",
+            "socio"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'concursantes' by its primary key",
+        "route": "/concursantes/$concursanteId",
+        "method": "DELETE",
+        "sql": "DELETE FROM concursantes WHERE concursanteId = $concursanteId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

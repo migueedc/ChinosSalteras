@@ -1,0 +1,147 @@
+body {
+    background-image: url('../images/smoke-1172477.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 2rem;
+}
+h1[class="text-center mb-4"]{
+    color: black;
+}
+
+.container-brackets {
+    border-radius: 1rem;
+}
+
+.brackets-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin: 0;
+}
+
+.grupo {
+    background: linear-gradient(45deg, #003ba8, rgb(55, 85, 168));
+    border-radius: 0.5rem;
+    padding: 1rem;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.participantes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-height: 50px; /* Para cuando esté vacío */
+}
+
+.participante {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: grab;
+}
+
+.participante:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.participante.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.participante.ganador {
+    background-color: #198754;
+    border-color: #198754;
+    transition: all 0.3s ease;
+}
+
+.participante.perdedor {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    transition: all 0.3s ease;
+}
+
+.fase {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
+}
+
+.menu-dots {
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s;
+}
+
+.menu-dots:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.participante.eliminado {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+}
+
+.dropdown-menu {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.over {
+    border: 2px dashed #fff;
+}
+
+/*BOTONES DE DESPLAZAMIENTO*/
+
+div.botones{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+button#boton-sorteo{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(45deg, #003ba8, rgb(55, 85, 168));
+    border-radius: 0.5rem;
+    border-style: none;
+    padding: 1rem;
+    color: white;
+    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
+}
+
+button#boton-sorteo:hover{
+    background: rgb(55, 85, 168);
+}
+
+div#boton-adelante, div#boton-atras{
+    cursor: pointer;
+}
+
+img.flecha{
+    display: block;
+    width: 5vw;
+    height: auto;
+}

@@ -1,0 +1,62 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'concursos'",
+        "route": "/concursos",
+        "method": "GET",
+        "sql": "SELECT * FROM concursos",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'concursos' by its primary key",
+        "route": "/concursos/$concursoId",
+        "method": "GET",
+        "sql": "SELECT * FROM concursos WHERE concursoId = $concursoId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'concursos'",
+        "route": "/concursos",
+        "method": "POST",
+        "sql": "INSERT INTO concursos (premioId, nombre, localidad) VALUES ($premioId, $nombre, $localidad)",
+        "request_body_params": [
+            "premioId",
+            "nombre",
+            "localidad"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'concursos' by its primary key",
+        "route": "/concursos/$concursoId",
+        "method": "PUT",
+        "sql": "UPDATE concursos SET premioId = $premioId, nombre = $nombre, localidad = $localidad WHERE concursoId = $concursoId",
+        "request_body_params": [
+            "premioId",
+            "nombre",
+            "localidad"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'concursos' by its primary key",
+        "route": "/concursos/$concursoId",
+        "method": "DELETE",
+        "sql": "DELETE FROM concursos WHERE concursoId = $concursoId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

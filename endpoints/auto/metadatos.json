@@ -1,0 +1,60 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'metadatos'",
+        "route": "/metadatos",
+        "method": "GET",
+        "sql": "SELECT * FROM metadatos",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'metadatos' by its primary key",
+        "route": "/metadatos/$metadatoId",
+        "method": "GET",
+        "sql": "SELECT * FROM metadatos WHERE metadatoId = $metadatoId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'metadatos'",
+        "route": "/metadatos",
+        "method": "POST",
+        "sql": "INSERT INTO metadatos (nombre, metadato) VALUES ($nombre, $metadato)",
+        "request_body_params": [
+            "nombre",
+            "metadato"
+        ],
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'metadatos' by its primary key",
+        "route": "/metadatos/$metadatoId",
+        "method": "PUT",
+        "sql": "UPDATE metadatos SET nombre = $nombre, metadato = $metadato WHERE metadatoId = $metadatoId",
+        "request_body_params": [
+            "nombre",
+            "metadato"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'metadatos' by its primary key",
+        "route": "/metadatos/$metadatoId",
+        "method": "DELETE",
+        "sql": "DELETE FROM metadatos WHERE metadatoId = $metadatoId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}
