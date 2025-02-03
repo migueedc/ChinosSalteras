@@ -7,6 +7,7 @@ import { metadatosAPI_auto } from "/js/api/_metadatos.js";
 
 import { cuadroRenderer } from "/js/renderers/cuadroRenderer.js";
 import {messageRenderer} from "/js/renderers/messages.js";
+import { parseHTML } from "/js/utils/parseHTML.js";
 
 let numConcursantesBase=0;
 let numGruposBase=0;
@@ -87,54 +88,58 @@ async function cargarCuadroInicial() {
 
 
 function cargarCuadroRepesca() {
-    let container = document.querySelector(`div.brackets-grid[id="2"]`);
-        numConcursantesRepesca = numGruposBase; 
-        let resto3 = numConcursantesRepesca % 3;
-        let resto4 = numConcursantesRepesca % 4;
-        let resto= (resto3<=resto4)?resto3:resto4;
-        numGruposRepesca = Math.floor(numConcursantesRepesca / ((resto==resto3)?3:4));
-        console.log(numConcursantesRepesca);
-        console.log(resto);
-        console.log(numGruposRepesca);
+    let html= `<div class="brackets-grid" id="2">
+            </div>`;
+    
+    let bracket0 = parseHTML(html);
+    let container= document.querySelector("div.container.container-brackets");
+    container.appendChild(bracket0);
 
-        for(let numero=0; numero<numConcursantesRepesca ; numero++){
-            let o= {concursanteId: `${numero}`, nombre: `Repescado ${numero}`}
-            eliminadosBase.push(o);
-        }
-        console.log(eliminadosBase);
+    numConcursantesRepesca = numGruposBase; 
+    let resto3 = numConcursantesRepesca % 3;
+    let resto4 = numConcursantesRepesca % 4;
+    let resto= (resto3<=resto4)?resto3:resto4;
+    numGruposRepesca = Math.floor(numConcursantesRepesca / ((resto==resto3)?3:4));
+    console.log(numConcursantesRepesca);
+    console.log(resto);
+    console.log(numGruposRepesca);
 
+    for(let numero=0; numero<numConcursantesRepesca ; numero++){
+        let o= {concursanteId: `${numero}`, nombre: `Repescado ${numero}`}
+        eliminadosBase.push(o);
+    }
+    console.log(eliminadosBase);
 
-        // Mezclamos los concursantes un par de veces pa que quede random
-        let num = 0;
-        while(num < 10) {
-            eliminadosBase = shuffle(eliminadosBase);
-            num++;
-        }
+    // Mezclamos los concursantes un par de veces pa que quede random
+    let num = 0;
+    while(num < 10) {
+        eliminadosBase = shuffle(eliminadosBase);
+        num++;
+    }
+    let concursanteIndex = 0;
         
-        let concursanteIndex = 0;
-        
-        // Vamos grupo por grupo
-        for(let n = 0; n < numGruposRepesca; n++) {
-            let cuadro = cuadroRenderer.rendCuadro(n + 1);
-            container.appendChild(cuadro);
-            let participantes = cuadro.querySelector("div.participantes");
+    // Vamos grupo por grupo
+    for(let n = 0; n < numGruposRepesca; n++) {
+        let cuadro = cuadroRenderer.rendCuadro(n + 1);
+        bracket0.appendChild(cuadro);
+        let participantes = cuadro.querySelector("div.participantes");
             
-            // Calculamos cuántos participantes van en este grupo
-            let participantesEnGrupo = (resto==resto3)?3:4;
-            // Si hay resto y estamos en los últimos grupos, metemos uno más
-            if (resto > 0 && n >= numGruposRepesca - resto) {
-                participantesEnGrupo = participantesEnGrupo + 1;
-            }
+        // Calculamos cuántos participantes van en este grupo
+        let participantesEnGrupo = (resto==resto3)?3:4;
+        // Si hay resto y estamos en los últimos grupos, metemos uno más
+        if (resto > 0 && n >= numGruposRepesca - resto) {
+            participantesEnGrupo = participantesEnGrupo + 1;
+        }
             
-            // Metemos los participantes en el grupo
-            for(let i = 0; i < participantesEnGrupo; i++) {
-                if (concursanteIndex < numConcursantesRepesca) {
-                    let conc = cuadroRenderer.rendParticipante(eliminadosBase[concursanteIndex]);
-                    participantes.appendChild(conc);
-                    concursanteIndex++;
-                }
+        // Metemos los participantes en el grupo
+        for(let i = 0; i < participantesEnGrupo; i++) {
+            if (concursanteIndex < numConcursantesRepesca) {
+                let conc = cuadroRenderer.rendParticipante(eliminadosBase[concursanteIndex]);
+                participantes.appendChild(conc);
+                concursanteIndex++;
             }
         }
+    }
 }
 
 //metadatos

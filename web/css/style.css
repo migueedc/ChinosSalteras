@@ -14,12 +14,25 @@ h1[class="text-center mb-4"]{
 }
 
 .brackets-grid {
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.brackets-grid.activo {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     margin: 0;
+    opacity: 1;
+    visibility: visible;
+    position: relative;
 }
-
 .grupo {
     background: linear-gradient(45deg, #003ba8, rgb(55, 85, 168));
     border-radius: 0.5rem;
@@ -141,7 +154,24 @@ div#boton-adelante, div#boton-atras{
 }
 
 img.flecha{
+    display: none;
+    width: 5vw;
+    height: auto;
+    opacity: 0;
+    visibility: hidden;
+    cursor: pointer;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+img.flecha.activo {
     display: block;
     width: 5vw;
     height: auto;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Un efecto guapo cuando pasas el ratón por las flechas */
+img.flecha:hover {
+    transform: scale(1.1);
 }

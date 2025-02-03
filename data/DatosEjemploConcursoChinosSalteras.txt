@@ -1,0 +1,53 @@
+#########--DATOS CONCURSO--###########
+NombreConcurso;Localidad;Premios
+XXX Concurso Internacional de Chinos Salteras;Salteras;1er Premio= 200,2º Premio= 75, Premio Joven= 50
+########--DATOS CONCURSANTES--########
+Nombre;Edad;Localidad;Foto;Socio
+Juan Pérez;34;Sevilla;/media/imagen1.jpg;Sí
+María García;29;Dos Hermanas;/media/imagen2.jpg;No
+Carlos Sánchez;45;Alcalá de Guadaíra;/media/imagen3.jpg;Sí
+Ana López;23;Utrera;/media/imagen4.jpg;No
+Luis Martínez;38;Mairena del Aljarafe;/media/imagen5.jpg;Sí
+Carmen González;52;Écija;/media/imagen6.jpg;No
+José Rodríguez;27;Los Palacios y Villafranca;/media/imagen7.jpg;Sí
+Laura Fernández;31;Coria del Río;/media/imagen8.jpg;No
+David Gómez;40;La Rinconada;/media/imagen9.jpg;Sí
+Marta Díaz;22;Lebrija;/media/imagen10.jpg;No
+Javier Ruiz;36;Sevilla;/media/imagen11.jpg;Sí
+Sara Morales;28;Dos Hermanas;/media/imagen12.jpg;No
+Manuel Torres;50;Alcalá de Guadaíra;/media/imagen13.jpg;Sí
+Elena Ramírez;33;Utrera;/media/imagen14.jpg;No
+Francisco Romero;41;Mairena del Aljarafe;/media/imagen15.jpg;Sí
+Isabel Vázquez;26;Écija;/media/imagen16.jpg;No
+Raúl Herrera;37;Los Palacios y Villafranca;/media/imagen17.jpg;Sí
+Patricia Ramos;30;Coria del Río;/media/imagen18.jpg;No
+Alberto Castro;44;La Rinconada;/media/imagen19.jpg;Sí
+Teresa Ortiz;25;Lebrija;/media/imagen20.jpg;No
+Miguel Delgado;39;Sevilla;/media/imagen21.jpg;Sí
+Rosa Navarro;32;Dos Hermanas;/media/imagen22.jpg;No
+Antonio Gil;48;Alcalá de Guadaíra;/media/imagen23.jpg;Sí
+Lucía Molina;24;Utrera;/media/imagen24.jpg;No
+Pedro Serrano;35;Mairena del Aljarafe;/media/imagen25.jpg;Sí
+Cristina Rubio;29;Écija;/media/imagen26.jpg;No
+Andrés Marín;42;Los Palacios y Villafranca;/media/imagen27.jpg;Sí
+Beatriz Iglesias;27;Coria del Río;/media/imagen28.jpg;No
+Sergio Peña;46;La Rinconada;/media/imagen29.jpg;Sí
+Eva Méndez;31;Lebrija;/media/imagen30.jpg;No
+Fernando Cabrera;38;Sevilla;/media/imagen31.jpg;Sí
+Silvia Rojas;28;Dos Hermanas;/media/imagen32.jpg;No
+Ricardo Campos;43;Alcalá de Guadaíra;/media/imagen33.jpg;Sí
+Adriana Soto;26;Utrera;/media/imagen34.jpg;No
+Enrique Reyes;37;Mairena del Aljarafe;/media/imagen35.jpg;Sí
+Natalia Pardo;30;Écija;/media/imagen36.jpg;No
+Víctor Lozano;41;Los Palacios y Villafranca;/media/imagen37.jpg;Sí
+Lorena Cordero;25;Coria del Río;/media/imagen38.jpg;No
+Hugo Esteban;39;La Rinconada;/media/imagen39.jpg;Sí
+Clara Fuentes;33;Lebrija;/media/imagen40.jpg;No
+Emilio Carrillo;47;Sevilla;/media/imagen41.jpg;Sí
+Alicia Vega;28;Dos Hermanas;/media/imagen42.jpg;No
+Pablo Bautista;36;Alcalá de Guadaíra;/media/imagen43.jpg;Sí
+Julia Pastor;24;Utrera;/media/imagen44.jpg;No
+Óscar Santana;40;Mairena del Aljarafe;/media/imagen45.jpg;Sí
+Paula Márquez;27;Écija;/media/imagen46.jpg;No
+Diego León;35;Los Palacios y Villafranca;/media/imagen47.jpg;Sí
+Mario Ramírez;20;Puerto Serrano; /media/image48.jpg;Sí
