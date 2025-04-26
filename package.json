@@ -1,0 +1,26 @@
+{
+  "name": "chinossalteras",
+  "version": "1.0.0",
+  "description": "This is an empty Silence project.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/migueedc/ChinosSalteras.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/migueedc/ChinosSalteras/issues"
+  },
+  "homepage": "https://github.com/migueedc/ChinosSalteras#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nedb": "^1.8.0",
+    "xlsx": "^0.18.5"
+  }
+}

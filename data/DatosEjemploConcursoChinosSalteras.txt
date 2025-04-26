@@ -1,4 +1,4 @@
-#########--DATOS CONCURSO--###########
+#########--DATOS CONCURSOS--########
 NombreConcurso;Localidad;Premios
 XXX Concurso Internacional de Chinos Salteras;Salteras;1er Premio= 200,2º Premio= 75, Premio Joven= 50
 ########--DATOS CONCURSANTES--########

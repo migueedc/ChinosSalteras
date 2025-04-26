@@ -1,13 +1,9 @@
 "use strict";
 
-import { concursantesAPI_auto } from "/js/api/_concursantes.js";
-import { concursosAPI_auto } from "/js/api/_concursos.js";
-import { premiosAPI_auto } from "/js/api/_premios.js";
-import { metadatosAPI_auto } from "/js/api/_metadatos.js";
-
-import { cuadroRenderer } from "/js/renderers/cuadroRenderer.js";
-import {messageRenderer} from "/js/renderers/messages.js";
-import { parseHTML } from "/js/utils/parseHTML.js";
+import { cuadroRenderer } from "/web/js/renderers/cuadroRenderer.js";
+import {messageRenderer} from "/web/js/renderers/messages.js";
+import { parseHTML } from "/web/js/utils/parseHTML.js";
+import { database } from "/index.js";
 
 let numConcursantesBase=0;
 let numGruposBase=0;

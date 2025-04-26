@@ -1,5 +1,5 @@
-import { parseHTML } from "/js/utils/parseHTML.js";
-import { photoRenderer } from "/js/renderers/photoRenderer.js";
+import { parseHTML } from "web/js/utils/parseHTML.js";
+import { photoRenderer } from "web/js/renderers/photoRenderer.js";
 
 const galleryRenderer = {
     asCardGallery: function (books) {
