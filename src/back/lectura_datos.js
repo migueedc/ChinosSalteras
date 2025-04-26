@@ -64,6 +64,12 @@ async function readConcursoChinos(ruta) {
         "Socio": "boolean"
     };
 
+    const CAMPOS_CONCURSO = {
+        "NombreConcurso": "string",
+        "Localidad": "string",
+        "Premio": "object",
+    };
+
     // Separar los datos de concursos y concursantes
     if (data.includes(strConcursos) && data.includes(strConcursantes)) {
         // Extraer la parte entre los marcadores de concursos
@@ -76,14 +82,47 @@ async function readConcursoChinos(ruta) {
     }
 
     // Procesar datos del concurso
-    let concursoInfo = {};
     const concursoLines = dataConcursos.split('\n').filter(line => line.includes(';'));
-    concursoLines.forEach(line => {
-        const [key, value] = line.split(';');
-        if (key && value) {
-            concursoInfo[key.trim()] = value.trim();
-        }
-    });
+    
+    // Procesar las líneas de concursos con map, similar a concursantes
+    const concursos = concursoLines.slice(1).map(line => {
+        line = line.split(';');
+        let obj = {};
+        Object.keys(CAMPOS_CONCURSO).forEach((key, i) => {
+            let elem = line[i] ? line[i].trim() : null;
+            if (elem !== null) {
+                if (CAMPOS_CONCURSO[key] === "object" && key === "Premio") {
+                    // Procesar los premios como un objeto
+                    let premiosObj = {};
+                    const premiosSplit = elem.split(',');
+                    
+                    premiosSplit.forEach(premio => {
+                        //console.log(premio)
+                        // Dividir por el signo igual y limpiar espacios
+                        const partes = premio.trim().split('=');
+                        if (partes.length === 2) {
+                            const nombrePremio = partes[0].trim();
+                            const valorPremio = partes[1].trim();
+                            // Añadir al objeto de premios
+                            Object.assign(premiosObj, {
+                                nombrePremio: valorPremio});
+                            
+                        }
+                    });
+                    //console.log(premiosObj);
+                    
+                    // Asignar el objeto de premios al campo correspondiente
+                    obj[key] = premiosObj;
+                }else {
+                    // Para los demás campos que no son premios
+                    obj[key] = elem;
+                }
+            }
+            obj[key] = (elem === '' || elem === null) ? null : elem;
+        });
+        return obj;
+    }).filter(concurso => concurso.NombreConcurso !== null);
+
    
     // Procesar datos de concursantes
     let concursantes = [];
@@ -107,7 +146,7 @@ async function readConcursoChinos(ruta) {
    
     // Estructurar los datos de salida
     const result = {
-        concursos: concursoInfo,
+        concursos: concursos,
         concursantes: concursantes
     };
    

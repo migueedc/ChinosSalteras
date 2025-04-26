@@ -3,13 +3,17 @@
 import { cuadroRenderer } from "/web/js/renderers/cuadroRenderer.js";
 import {messageRenderer} from "/web/js/renderers/messages.js";
 import { parseHTML } from "/web/js/utils/parseHTML.js";
-import { database } from "/index.js";
+import { database } from "../src/back/back.js";
+
+const BASE_API = "/api/v1";
+const mainResource= "ChinosSalteras";
 
 let numConcursantesBase=0;
 let numGruposBase=0;
 let numConcursantesRepesca=0;
 let numGruposRepesca=0;
 let eliminadosBase= [];
+let data= database;
 
 
 let botonSorteo= document.querySelector("button#boton-sorteo");
@@ -34,7 +38,7 @@ function shuffle(array) {
 async function cargarCuadroInicial() {
     let container = document.querySelector(`div.brackets-grid[id="1"]`);
     try {
-        let concursantes = await concursantesAPI_auto.getAll();
+        data = await fetch(`${BASE_API}/${mainResource}`);
         numConcursantesBase = concursantes.length;
         numGruposBase = Math.floor(numConcursantesBase / 4);
         let resto = numConcursantesBase % 4;
@@ -142,7 +146,7 @@ function cargarCuadroRepesca() {
 
 async function cargarMetaDatos() {
     try {
-        let premios = await premiosAPI_auto.getAll();
+        let premios = data.concursos.Premios;
         let premioSalteras= premios[0];
         //console.log(premios);
         //premios.forEach(p=> {console.log(p.nombreConcurso)});

@@ -1,18 +1,24 @@
 import dataStore from "nedb";
-
+import {readConcursoChinos, checkFileAndMergeContent} from "./lectura_datos.js"
 const BASE_API = "/api/v1";
 const mainResource= "ChinosSalteras";
-let objData= [];
+
+
+//VARIABLES ESPECÍFICAS
+let rutaFichero= "./data/DatosEjemploConcursoChinosSalteras.csv";
+let ficheroExists= rutaFichero?true:false;
+let objData= await readConcursoChinos(rutaFichero);
 let database= new dataStore();
+
 
 //funciones de peticiones backend
 function loadBackend(app){
-
 
     database.find({}, (err, data)=>{
         if(data.length===0){
             database.insert(objData);
         }
+        //console.log(objData);
     })
 
     app.get(`${BASE_API}/${mainResource}/loadInitialData`, (request, response) => {
@@ -281,3 +287,11 @@ function loadBackend(app){
         return res;
     }      
 }
+
+checkFileAndMergeContent(rutaFichero);
+
+//console.log("lectura de datos realizada", objData);
+//loadBackend()
+//console.log(database.getAllData());
+
+export{loadBackend, database};
