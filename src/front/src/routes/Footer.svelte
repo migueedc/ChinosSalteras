@@ -1,1 +1,1 @@
-<p><a href="/about">about</a></p>
+<p>MADE WITH LOVE BY MIGDOMCIE</p>

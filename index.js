@@ -20,6 +20,7 @@ let ficheroExists= rutaFichero?true:false;
 
 let objData =  await readConcursoChinos(rutaFichero);
 
+app.use(cors());
 loadBackend(app);
 //app.use(handler);
 
