@@ -232,23 +232,59 @@ function cargarMetaDatos() {
 
 async function cargarDatos(){
     try {
-            const res = await fetch("http://localhost:3000/api/v1/ChinosSalteras");
-            if (res.status==404) {
-                showAlert("No se ha encontrado ningún recurso que coincida con los datos especificados", "danger");
-                datos=[];
-                return;
-            }
-            if (res.status==500) {
-                showAlert("Error interno del servidor", "danger");
-                return;
-            }
-            const data = await res.json();
-            datos = data[0];
-            participantes= datos.concursantes;
-            console.log(datos);
-        } catch (error) {
-            showAlert("No se pudo conectar con el servidor", "danger");
+        const res = await fetch("http://localhost:3000/api/v1/ChinosSalteras");
+        if (res.status==404) {
+            showAlert("No se ha encontrado ningún recurso que coincida con los datos especificados", "danger");
+            datos=[];
+            return;
         }
+        if (res.status==500) {
+            showAlert("Error interno del servidor", "danger");
+            return;
+        }
+        const data = await res.json();
+        datos = data[0];
+        participantes = datos.concursantes;
+        
+        // NUEVO: Verificar y asegurar IDs únicos
+        participantes = participantes.map((participante, index) => {
+            return {
+                ...participante,
+                // Usar el ID existente o generar uno único
+                concursanteId: participante.concursanteId || `participante_${index}_${Date.now()}`,
+                // Asegurar que tenga nombre
+                nombre: participante.nombre || `Participante ${index + 1}`,
+                // Inicializar propiedades que puedan faltar
+                grupoId: participante.grupoId || null,
+                resultado: participante.resultado || null
+            };
+        });
+        
+        // Verificar que no hay duplicados
+        const ids = participantes.map(p => p.concursanteId);
+        const duplicados = ids.filter((id, index) => ids.indexOf(id) !== index);
+        
+        if (duplicados.length > 0) {
+            console.warn('IDs duplicados encontrados:', duplicados);
+            // Regenerar IDs para participantes duplicados
+            participantes = participantes.map((participante, index) => {
+                if (duplicados.includes(participante.concursanteId)) {
+                    return {
+                        ...participante,
+                        concursanteId: `participante_fixed_${index}_${Date.now()}`
+                    };
+                }
+                return participante;
+            });
+        }
+        
+        console.log('Participantes procesados:', participantes);
+        crearGruposIniciales();
+        
+    } catch (error) {
+        showAlert("No se pudo conectar con el servidor", "danger");
+        console.error('Error cargando datos:', error);
+    }
 }
 
 function showAlert(message, type) {
@@ -266,6 +302,7 @@ onMount(()=>{
     });
 </script>
 
+<!-- svelte-ignore css_unused_selector -->
 <style>
   :global(body) {
       background-image: url('/images/smoke-1172477.jpg');
